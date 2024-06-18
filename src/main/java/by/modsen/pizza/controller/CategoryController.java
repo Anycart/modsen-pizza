@@ -1,38 +1,29 @@
-package by.modsen.pizza.controllers;
-
-
+package by.modsen.pizza.controller;
 
 import by.modsen.pizza.dto.CategoryDto;
 import by.modsen.pizza.service.CategoryService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/api/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
         CategoryDto createdCategory = categoryService.createCategory(categoryDto);
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id,
-                                                      @RequestBody @Valid CategoryDto categoryDto) {
+                                                      @RequestBody CategoryDto categoryDto) {
         CategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
