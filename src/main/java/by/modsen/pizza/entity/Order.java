@@ -1,10 +1,9 @@
-package by.modsen.pizza.models;
+package by.modsen.pizza.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +30,5 @@ public class Order {
     private double totalAmount;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems;
-
-
+    private List<OrderItem> orders;
 }

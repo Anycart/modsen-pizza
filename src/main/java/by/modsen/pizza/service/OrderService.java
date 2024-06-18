@@ -1,34 +1,11 @@
 package by.modsen.pizza.service;
 
-
 import by.modsen.pizza.dto.OrderDto;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
-
-@Service
-public class OrderService {
-
-    public OrderDto createOrder(OrderDto orderDto) {
-        return new OrderDto();
-    }
-
-
-    public OrderDto getOrderById( Long id) {
-        return new OrderDto();
-    }
-
-
-    public List<OrderDto> getAllOrders() {
-
-        return new ArrayList<>();
-    }
-
-
-    public List<OrderDto> getOrdersByUserId(Long userId) {
-
-        return new ArrayList();
-    }
+public interface OrderService {
+    OrderDto createOrder(OrderDto orderDto);
+    OrderDto getOrderById(Long id);
+    List<OrderDto> getAllOrders();
+    List<OrderDto> getOrdersByUserId(Long userId);
 }

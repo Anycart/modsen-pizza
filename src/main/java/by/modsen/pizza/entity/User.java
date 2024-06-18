@@ -1,10 +1,9 @@
-package by.modsen.pizza.models;
+package by.modsen.pizza.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
@@ -29,5 +28,5 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orderList;
+    private List<Order> orders;
 }

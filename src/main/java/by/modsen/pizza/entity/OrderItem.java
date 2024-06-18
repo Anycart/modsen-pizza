@@ -1,5 +1,4 @@
-package by.modsen.pizza.models;
-
+package by.modsen.pizza.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,5 +30,4 @@ public class OrderItem {
 
     @Column(name = "price")
     private double price;
-
 }
