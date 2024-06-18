@@ -1,4 +1,4 @@
-package by.modsen.pizza;
+package com.modsen.pizza;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
