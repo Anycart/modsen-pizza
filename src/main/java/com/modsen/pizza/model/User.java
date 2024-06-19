@@ -12,6 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "users")
@@ -27,6 +29,7 @@ public class User {
     private String password;
     private String fullName;
     private String sex;
+    private Date dateOfBirth;
     @Enumerated(value = EnumType.STRING)
     private Role role;
 }

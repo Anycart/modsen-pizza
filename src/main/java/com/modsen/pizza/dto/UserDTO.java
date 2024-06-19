@@ -20,7 +20,6 @@ public class UserDTO {
     private String fullName;
     @NotEmpty
     private String sex;
-    @NotEmpty
     private Date dateOfBirth;
 
 }
