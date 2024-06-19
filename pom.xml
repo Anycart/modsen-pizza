@@ -8,13 +8,13 @@
         <version>3.3.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>by.modsen</groupId>
+    <groupId>com.modsen</groupId>
     <artifactId>pizza</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pizza</name>
     <description>Modsen practice project</description>
     <properties>
-        <java.version>22</java.version>
+        <java.version>21</java.version>
     </properties>
 
     <dependencies>

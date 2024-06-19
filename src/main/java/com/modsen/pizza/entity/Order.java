@@ -1,4 +1,4 @@
-package by.modsen.pizza.entity;
+package com.modsen.pizza.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @Column(name = "total_amount")
-    private double totalAmount;
+    private Double totalAmount;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orders;

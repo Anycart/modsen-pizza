@@ -1,7 +1,8 @@
-package by.modsen.pizza.service.impl;
+package com.modsen.pizza.service.impl;
 
-import by.modsen.pizza.dto.ProductDto;
-import by.modsen.pizza.service.ProductService;
+import com.modsen.pizza.dto.ProductDto;
+import com.modsen.pizza.service.ProductService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
-
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getAllProducts() {
+    public List<ProductDto> getAllProducts(Pageable pageable) {
         return null;
     }
 
