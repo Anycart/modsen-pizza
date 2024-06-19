@@ -1,7 +1,8 @@
-package by.modsen.pizza.service.impl;
+package com.modsen.pizza.service.impl;
 
-import by.modsen.pizza.dto.CategoryDto;
-import by.modsen.pizza.service.CategoryService;
+import com.modsen.pizza.dto.CategoryDto;
+import com.modsen.pizza.service.CategoryService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
-
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> getAllCategories() {
+    public List<CategoryDto> getAllCategories(Pageable pageable) {
         return null;
     }
 }

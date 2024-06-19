@@ -1,8 +1,10 @@
-package by.modsen.pizza.controller;
+package com.modsen.pizza.controller;
 
-import by.modsen.pizza.dto.CategoryDto;
-import by.modsen.pizza.service.CategoryService;
+import com.modsen.pizza.dto.CategoryDto;
+import com.modsen.pizza.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +43,13 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> getAllCategories() {
-        List<CategoryDto> categories = categoryService.getAllCategories();
+    public ResponseEntity<List<CategoryDto>> getAllCategories(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "sort", defaultValue = "id") String sortField
+    ) {
+        List<CategoryDto> categories = categoryService.getAllCategories(
+                PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortField)));
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 }

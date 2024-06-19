@@ -1,21 +1,20 @@
-package by.modsen.pizza.entity;
+package com.modsen.pizza.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
 
 @Entity
-@Table(name = "category")
+@Table(name = "product")
 @NoArgsConstructor
-@Getter
 @Setter
-public class Category {
+@Getter
+public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -24,6 +23,10 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    @Column(name = "price")
+    private Double price;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

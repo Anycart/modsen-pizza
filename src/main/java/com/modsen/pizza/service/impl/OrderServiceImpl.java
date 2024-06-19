@@ -1,7 +1,8 @@
-package by.modsen.pizza.service.impl;
+package com.modsen.pizza.service.impl;
 
-import by.modsen.pizza.dto.OrderDto;
-import by.modsen.pizza.service.OrderService;
+import com.modsen.pizza.dto.OrderDto;
+import com.modsen.pizza.service.OrderService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getAllOrders() {
+    public List<OrderDto> getAllOrders(Pageable pageable) {
         return null;
     }
 

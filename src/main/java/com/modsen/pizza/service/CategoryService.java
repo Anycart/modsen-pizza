@@ -1,6 +1,7 @@
-package by.modsen.pizza.service;
+package com.modsen.pizza.service;
 
-import by.modsen.pizza.dto.CategoryDto;
+import com.modsen.pizza.dto.CategoryDto;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface CategoryService {
@@ -8,5 +9,5 @@ public interface CategoryService {
     CategoryDto updateCategory(Long id, CategoryDto categoryDto);
     void deleteCategory(Long id);
     CategoryDto getCategoryById(Long id);
-    List<CategoryDto> getAllCategories();
+    List<CategoryDto> getAllCategories(Pageable pageable);
 }

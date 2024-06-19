@@ -1,4 +1,4 @@
-package by.modsen.pizza.dto;
+package com.modsen.pizza.dto;
 
 import lombok.Data;
 

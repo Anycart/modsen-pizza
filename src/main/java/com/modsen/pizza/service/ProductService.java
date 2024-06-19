@@ -1,6 +1,7 @@
-package by.modsen.pizza.service;
+package com.modsen.pizza.service;
 
-import by.modsen.pizza.dto.ProductDto;
+import com.modsen.pizza.dto.ProductDto;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ProductService {
@@ -8,6 +9,6 @@ public interface ProductService {
     ProductDto updateProduct(Long id, ProductDto productDto);
     void deleteProduct(Long id);
     ProductDto getProductById(Long id);
-    List<ProductDto> getAllProducts();
+    List<ProductDto> getAllProducts(Pageable pageable);
     List<ProductDto> getProductsByCategory(Long id);
 }

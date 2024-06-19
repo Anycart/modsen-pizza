@@ -1,8 +1,10 @@
-package by.modsen.pizza.controller;
+package com.modsen.pizza.controller;
 
-import by.modsen.pizza.dto.OrderDto;
-import by.modsen.pizza.service.OrderService;
+import com.modsen.pizza.dto.OrderDto;
+import com.modsen.pizza.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +30,13 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDto>> getAllOrders() {
-        List<OrderDto> orders = orderService.getAllOrders();
+    public ResponseEntity<List<OrderDto>> getAllOrders(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "sort", defaultValue = "id") String sortField
+    ) {
+        List<OrderDto> orders = orderService.getAllOrders(
+                PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortField)));
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
