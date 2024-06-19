@@ -8,6 +8,7 @@ import com.modsen.pizza.security.RefreshJWTRequest;
 import com.modsen.pizza.service.AuthService;
 import com.modsen.pizza.service.RegistrationService;
 import jakarta.security.auth.message.AuthException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class AuthController {
     private final RegistrationService registrationService;
 
     @PostMapping("login")
-    public ResponseEntity<JWTResponse> login(@RequestBody JWTRequest authRequest) throws AuthException {
+    public ResponseEntity<JWTResponse> login(@RequestBody @Valid JWTRequest authRequest) throws AuthException {
         final JWTResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
     }
@@ -45,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("registration")
-    public  ResponseEntity<JWTResponse> registration(@RequestBody UserDTO userDTO){
+    public  ResponseEntity<JWTResponse> registration(@RequestBody @Valid UserDTO userDTO){
        return ResponseEntity.ok(registrationService.register(modelMapper.map(userDTO, User.class)));
     }
 
