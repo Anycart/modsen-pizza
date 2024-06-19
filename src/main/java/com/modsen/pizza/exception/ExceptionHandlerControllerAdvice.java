@@ -1,4 +1,4 @@
-package by.modsen.pizza.exception;
+package com.modsen.pizza.exception;
 
 
 import jakarta.validation.ConstraintViolationException;
@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class ErrorHandlingControllerAdvice {
+public class ExceptionHandlerControllerAdvice {
 
     @ResponseBody
     @ExceptionHandler(ConstraintViolationException.class)
@@ -43,5 +44,13 @@ public class ErrorHandlingControllerAdvice {
                 .collect(Collectors.toList());
         return new ValidationErrorResponse(violations);
     }
-
+    @ResponseBody
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ValidationErrorResponse onRuntimeException(
+            RuntimeException e
+    ) {
+        Violation violation = new Violation("system", "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова позже.");
+        return new ValidationErrorResponse(Collections.singletonList(violation));
+    }
 }

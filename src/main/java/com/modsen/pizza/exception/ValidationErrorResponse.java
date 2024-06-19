@@ -1,4 +1,4 @@
-package by.modsen.pizza.exception;
+package com.modsen.pizza.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

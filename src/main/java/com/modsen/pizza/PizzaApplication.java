@@ -1,4 +1,4 @@
-package by.modsen.pizza;
+package com.modsen.pizza;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
