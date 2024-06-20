@@ -1,7 +1,7 @@
 package com.modsen.pizza.service;
 
 import com.modsen.pizza.enumeration.Role;
-import com.modsen.pizza.model.User;
+import com.modsen.pizza.entity.User;
 import com.modsen.pizza.repository.UserRepository;
 import com.modsen.pizza.security.JWTResponse;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.modsen.pizza.security;
 
-import com.modsen.pizza.model.User;
+import com.modsen.pizza.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,7 +1,7 @@
 package com.modsen.pizza.controller;
 
 import com.modsen.pizza.dto.UserDTO;
-import com.modsen.pizza.model.User;
+import com.modsen.pizza.entity.User;
 import com.modsen.pizza.security.JWTRequest;
 import com.modsen.pizza.security.JWTResponse;
 import com.modsen.pizza.security.RefreshJWTRequest;
@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

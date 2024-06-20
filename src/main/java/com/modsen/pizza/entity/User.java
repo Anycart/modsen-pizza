@@ -1,34 +1,35 @@
 package com.modsen.pizza.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.Getter;
+import com.modsen.pizza.enumeration.Role;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.List;
+import org.hibernate.annotations.NaturalId;
+
+import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "users")
 @NoArgsConstructor
-@Getter
-@Setter
 public class User {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "username")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @NaturalId
     private String username;
-
-    @Column(name = "mail")
-    private String mail;
-
-    @Column(name = "password")
+    private String email;
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Order> orders;
+    private String fullName;
+    private String sex;
+    private Date dateOfBirth;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 }

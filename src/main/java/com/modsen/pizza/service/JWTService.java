@@ -1,6 +1,6 @@
 package com.modsen.pizza.service;
 
-import com.modsen.pizza.model.User;
+import com.modsen.pizza.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
