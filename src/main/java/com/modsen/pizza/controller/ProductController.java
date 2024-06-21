@@ -1,6 +1,7 @@
 package com.modsen.pizza.controller;
 
 import com.modsen.pizza.dto.ProductDto;
+import com.modsen.pizza.entity.Product;
 import com.modsen.pizza.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -48,7 +49,7 @@ public class ProductController {
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sort", defaultValue = "id") String sortField
     ) {
-        List<ProductDto> products = productService.getAllProducts(
+        List<Product> products = productService.getAllProducts(
                 PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortField)));
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
