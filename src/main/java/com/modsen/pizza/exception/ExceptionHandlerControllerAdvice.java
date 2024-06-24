@@ -50,7 +50,8 @@ public class ExceptionHandlerControllerAdvice {
     public ValidationErrorResponse onRuntimeException(
             RuntimeException e
     ) {
-        Violation violation = new Violation("system", "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова позже.");
+        Violation violation = new Violation("system", "Unexpected error occurred." +
+                "Please try again later.");
         return new ValidationErrorResponse(Collections.singletonList(violation));
     }
 }

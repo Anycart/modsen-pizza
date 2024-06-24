@@ -2,6 +2,7 @@ package com.modsen.pizza.controller;
 
 import com.modsen.pizza.dto.OrderDto;
 import com.modsen.pizza.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody @Valid OrderDto orderDto) {
         OrderDto createdOrder = orderService.createOrder(orderDto);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
