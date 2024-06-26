@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -21,12 +22,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto productDto) {
         ProductDto createdProduct = productService.createProduct(productDto);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);//как передавать категорию
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,
-                                                    @RequestBody ProductDto productDto) {
+                                                    @RequestBody @Valid ProductDto productDto) {
         ProductDto updatedProduct = productService.updateProduct(id, productDto);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }

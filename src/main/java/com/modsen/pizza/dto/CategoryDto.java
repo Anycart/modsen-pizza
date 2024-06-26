@@ -1,6 +1,9 @@
 package com.modsen.pizza.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -10,9 +13,11 @@ import java.util.List;
 public class CategoryDto {
     @Min(value = 0)
     private Long id;
-    @NotNull
+    @NotEmpty
     private String name;
-    @NotNull
+    @NotEmpty
     private String description;
+    @Valid
+    @JsonManagedReference
     private List<ProductDto> products;
 }

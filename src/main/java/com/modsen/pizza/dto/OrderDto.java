@@ -19,4 +19,5 @@ public class OrderDto {
     private LocalDateTime orderDate;
     @Min(value = 0)
     private Double totalAmount;
+
 }
