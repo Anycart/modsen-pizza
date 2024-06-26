@@ -1,6 +1,5 @@
 package com.modsen.pizza.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -27,8 +26,7 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
-    @JsonBackReference
     private Category category;
 }

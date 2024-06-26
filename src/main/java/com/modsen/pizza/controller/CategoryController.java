@@ -8,7 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id,
-                                                      @RequestBody CategoryDto categoryDto) {
+                                                      @RequestBody @Valid CategoryDto categoryDto) {
         CategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
@@ -44,6 +46,7 @@ public class CategoryController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<CategoryDto>> getAllCategories(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,

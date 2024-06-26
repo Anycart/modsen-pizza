@@ -1,10 +1,10 @@
 package com.modsen.pizza.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.util.List;
 
 @Entity
@@ -25,7 +25,13 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
     private List<Product> products;
+
+    @PreRemove
+    private void preRemove() {
+        for (Product product : products) {
+            product.setCategory(null);
+        }
+    }
 }

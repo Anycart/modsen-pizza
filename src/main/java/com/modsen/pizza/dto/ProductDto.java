@@ -1,18 +1,22 @@
 package com.modsen.pizza.dto;
 
-import com.modsen.pizza.entity.Category;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 
 @Data
 public class ProductDto {
     @Min(value = 0)
     private Long id;
-    @NotNull
+    @NotEmpty
     private String name;
-    @NotNull
+    @NotEmpty
     private String description;
     @Min(value = 0)
     private Double price;
+    @Valid
+    @JsonBackReference
+    private CategoryDto category;
 }

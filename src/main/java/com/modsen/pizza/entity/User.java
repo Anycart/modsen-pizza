@@ -1,21 +1,17 @@
 package com.modsen.pizza.entity;
 
 import com.modsen.pizza.enumeration.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
+import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
@@ -23,7 +19,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NaturalId
     private String username;
     private String email;
     private String password;
@@ -32,4 +27,6 @@ public class User {
     private Date dateOfBirth;
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 }

@@ -45,10 +45,10 @@ public class ExceptionHandlerControllerAdvice {
         return new ValidationErrorResponse(violations);
     }
     @ResponseBody
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ValidationErrorResponse onRuntimeException(
-            RuntimeException e
+            Exception e
     ) {
         Violation violation = new Violation("system", "Unexpected error occurred." +
                 "Please try again later.");

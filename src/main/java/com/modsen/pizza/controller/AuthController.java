@@ -12,14 +12,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173") //для фронта
 public class AuthController {
 
     private final AuthServiceImpl authServiceImpl;
@@ -45,8 +43,8 @@ public class AuthController {
     }
 
     @PostMapping("registration")
-    public  ResponseEntity<JWTResponse> registration(@RequestBody @Valid UserDTO userDTO){
-       return ResponseEntity.ok(registrationServiceImpl.register(modelMapper.map(userDTO, User.class)));
+    public ResponseEntity<JWTResponse> registration(@RequestBody @Valid UserDTO userDTO) {
+        return ResponseEntity.ok(registrationServiceImpl.register(modelMapper.map(userDTO, User.class)));
     }
 
 }

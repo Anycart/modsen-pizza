@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,7 +24,8 @@ public final class JWTUtils {
     }
 
     private static Set<Role> getRoles(Claims claims) {
-        final List<String> roles = claims.get("roles", List.class);
+        final String rolesString = claims.get("roles", String.class);
+        final List<String> roles = Arrays.asList(rolesString.split(","));
         return roles.stream()
                 .map(Role::valueOf)
                 .collect(Collectors.toSet());
