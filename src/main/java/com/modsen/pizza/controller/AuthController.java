@@ -48,5 +48,6 @@ public class AuthController {
         JWTResponse register = registrationService.register(user);
         return ResponseEntity.ok(register);
 
+
     }
 }
