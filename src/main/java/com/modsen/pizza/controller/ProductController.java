@@ -1,6 +1,7 @@
 package com.modsen.pizza.controller;
 
-import com.modsen.pizza.dto.ProductDto;
+import com.modsen.pizza.dto.repsonse.ProductResponseDto;
+import com.modsen.pizza.dto.request.ProductRequestDto;
 import com.modsen.pizza.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,22 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
 @RequiredArgsConstructor
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto productDto) {
-        ProductDto createdProduct = productService.createProduct(productDto);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);//как передавать категорию
+    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductRequestDto productRequestDto) {
+        ProductResponseDto createdProduct = productService.createProduct(productRequestDto);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,
-                                                    @RequestBody @Valid ProductDto productDto) {
-        ProductDto updatedProduct = productService.updateProduct(id, productDto);
+    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable Long id,
+                                                            @RequestBody @Valid ProductRequestDto productRequestDto) {
+        ProductResponseDto updatedProduct = productService.updateProduct(id, productRequestDto);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
@@ -39,25 +40,25 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
-        ProductDto product = productService.getProductById(id);
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
+        ProductResponseDto product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllProducts(
+    public ResponseEntity<List<ProductResponseDto>> getAllProducts(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sort", defaultValue = "id") String sortField
     ) {
-        List<ProductDto> products = productService.getAllProducts(
+        List<ProductResponseDto> products = productService.getAllProducts(
                 PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortField)));
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable Long categoryId) {
-        List<ProductDto> products = productService.getProductsByCategory(categoryId);
+    public ResponseEntity<List<ProductResponseDto>> getProductsByCategory(@PathVariable Long categoryId) {
+        List<ProductResponseDto> products = productService.getProductsByCategory(categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

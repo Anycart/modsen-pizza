@@ -1,6 +1,7 @@
 package com.modsen.pizza.controller;
 
-import com.modsen.pizza.dto.CategoryDto;
+import com.modsen.pizza.dto.repsonse.CategoryResponseDto;
+import com.modsen.pizza.dto.request.CategoryRequestDto;
 import com.modsen.pizza.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,26 +11,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
 @RequiredArgsConstructor
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CategoryDto categoryDto) {
-        CategoryDto createdCategory = categoryService.createCategory(categoryDto);
+    public ResponseEntity<CategoryResponseDto> createCategory(@RequestBody @Valid CategoryRequestDto requestDto) {
+        CategoryResponseDto createdCategory = categoryService.createCategory(requestDto);
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id,
-                                                      @RequestBody @Valid CategoryDto categoryDto) {
-        CategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
+    public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Long id,
+                                                              @RequestBody @Valid CategoryRequestDto requestDto){
+        CategoryResponseDto updatedCategory = categoryService.updateCategory(id, requestDto);
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
@@ -40,19 +40,18 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) {
-        CategoryDto category = categoryService.getCategoryById(id);
+    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long id) {
+        CategoryResponseDto category = categoryService.getCategoryById(id);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<CategoryDto>> getAllCategories(
+    public ResponseEntity<List<CategoryResponseDto>> getAllCategories(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sort", defaultValue = "id") String sortField
     ) {
-        List<CategoryDto> categories = categoryService.getAllCategories(
+        List<CategoryResponseDto> categories = categoryService.getAllCategories(
                 PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortField)));
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }

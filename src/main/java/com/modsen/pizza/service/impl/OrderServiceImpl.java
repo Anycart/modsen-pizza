@@ -1,12 +1,14 @@
 package com.modsen.pizza.service.impl;
 
-import com.modsen.pizza.dto.OrderDto;
+import com.modsen.pizza.dto.repsonse.OrderResponseDto;
+import com.modsen.pizza.dto.request.OrderRequestDto;
 import com.modsen.pizza.entity.Order;
 import com.modsen.pizza.entity.User;
 import com.modsen.pizza.repository.OrderRepository;
 import com.modsen.pizza.repository.UserRepository;
 import com.modsen.pizza.service.OrderService;
-import com.modsen.pizza.util.OrderConverter;
+import com.modsen.pizza.util.OrderRequestDtoToOrderConverter;
+import com.modsen.pizza.util.OrderToOrderResponseDtoConverter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,46 +19,47 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 @Transactional
 @RequiredArgsConstructor
-@Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final OrderConverter orderConverter;
     private final UserRepository userRepository;
+    private final OrderToOrderResponseDtoConverter orderToOrderResponseDtoConverter;
+    private final OrderRequestDtoToOrderConverter orderRequestDtoToOrderConverter;
 
     @Override
-    public OrderDto createOrder(@Valid OrderDto orderDto) {
-        User user = userRepository.findById(orderDto.getUserId()).orElseThrow(NoSuchElementException::new);
-        Order order = orderRepository.save(orderConverter.convertToOrder(orderDto));
+    public OrderResponseDto createOrder(@Valid OrderRequestDto orderRequestDto) {
+        User user = userRepository.findById(orderRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
+        Order order = orderRepository.save(orderRequestDtoToOrderConverter.convert(orderRequestDto));
         order.setUser(user);
-        return orderConverter.convertToOrderDTO(order);
+        return orderToOrderResponseDtoConverter.convert(order);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public OrderDto getOrderById(Long id) {
+    public OrderResponseDto getOrderById(Long id) {
         return orderRepository.findById(id)
-                .map(orderConverter::convertToOrderDTO)
+                .map(orderToOrderResponseDtoConverter::convert)
                 .orElseThrow(NoSuchElementException::new);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderDto> getAllOrders(Pageable pageable) {
+    public List<OrderResponseDto> getAllOrders(Pageable pageable) {
         return orderRepository.findAll()
                 .stream()
-                .map(orderConverter::convertToOrderDTO)
+                .map(orderToOrderResponseDtoConverter::convert)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<OrderDto> getOrdersByUserId(Long userId) {
+    public List<OrderResponseDto> getOrdersByUserId(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(NoSuchElementException::new)
                 .getOrders()
                 .stream()
-                .map(orderConverter::convertToOrderDTO)
+                .map(orderToOrderResponseDtoConverter::convert)
                 .collect(Collectors.toList());
     }
 }

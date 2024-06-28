@@ -1,18 +1,17 @@
 package com.modsen.pizza.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -30,6 +29,6 @@ public class Order {
     @Column(name = "total_amount")
     private Double totalAmount;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderItem> orders;
 }
