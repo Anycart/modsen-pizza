@@ -1,6 +1,6 @@
 package com.modsen.pizza.controller;
 
-import com.modsen.pizza.dto.UserDTO;
+import com.modsen.pizza.dto.UserDto;
 import com.modsen.pizza.entity.User;
 import com.modsen.pizza.security.JWTRequest;
 import com.modsen.pizza.security.JWTResponse;
@@ -15,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173") //для фронта
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final AuthService authService;
@@ -43,11 +43,9 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<JWTResponse> registration(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<JWTResponse> registration(@RequestBody @Valid UserDto userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         JWTResponse register = registrationService.register(user);
         return ResponseEntity.ok(register);
-
-
     }
 }

@@ -2,18 +2,17 @@ package com.modsen.pizza.entity;
 
 import com.modsen.pizza.enumeration.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Date;
+import lombok.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -24,7 +23,7 @@ public class User {
     private String password;
     private String fullName;
     private String sex;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Enumerated(value = EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")

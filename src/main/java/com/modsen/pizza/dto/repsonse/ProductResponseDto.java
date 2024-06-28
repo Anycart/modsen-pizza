@@ -1,22 +1,23 @@
-package com.modsen.pizza.dto;
+package com.modsen.pizza.dto.repsonse;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.modsen.pizza.dto.repsonse.CategoryResponseDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ProductDto {
-    @Min(value = 0)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductResponseDto {
     private Long id;
-    @NotEmpty
     private String name;
-    @NotEmpty
     private String description;
-    @Min(value = 0)
     private Double price;
-    @Valid
-    @JsonBackReference
-    private CategoryDto category;
+    private CategoryResponseDto category;
 }

@@ -1,12 +1,13 @@
 package com.modsen.pizza.service;
 
-import com.modsen.pizza.dto.OrderDto;
+import com.modsen.pizza.dto.repsonse.OrderResponseDto;
+import com.modsen.pizza.dto.request.OrderRequestDto;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface OrderService {
-    OrderDto createOrder(OrderDto orderDto);
-    OrderDto getOrderById(Long id);
-    List<OrderDto> getAllOrders(Pageable pageable);
-    List<OrderDto> getOrdersByUserId(Long userId);
+    OrderResponseDto createOrder(OrderRequestDto requestDto);
+    OrderResponseDto getOrderById(Long id);
+    List<OrderResponseDto> getAllOrders(Pageable pageable);
+    List<OrderResponseDto> getOrdersByUserId(Long userId);
 }

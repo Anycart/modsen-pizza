@@ -1,12 +1,14 @@
 package com.modsen.pizza.service.impl;
 
-import com.modsen.pizza.dto.ProductDto;
+import com.modsen.pizza.dto.repsonse.ProductResponseDto;
+import com.modsen.pizza.dto.request.ProductRequestDto;
 import com.modsen.pizza.entity.Category;
 import com.modsen.pizza.entity.Product;
 import com.modsen.pizza.repository.CategoryRepository;
 import com.modsen.pizza.repository.ProductRepository;
 import com.modsen.pizza.service.ProductService;
-import com.modsen.pizza.util.ProductConverter;
+import com.modsen.pizza.util.ProductRequestDtoToProductConverter;
+import com.modsen.pizza.util.ProductToProductResponseDtoConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,31 +23,37 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final ProductConverter productConverter;
     private final CategoryRepository categoryRepository;
+    private final ProductRequestDtoToProductConverter productRequestDtoToProductConverter;
+    private final ProductToProductResponseDtoConverter productToProductResponseDtoConverter;
 
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
-        Product product = productRepository.save(productConverter.convertToProduct(productDto));
-        return productConverter.convertToProductDTO(product);
+    public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
+        Product product = productRepository
+                .save(productRequestDtoToProductConverter.convert(productRequestDto));
+        return productToProductResponseDtoConverter.convert(product);
     }
 
     @Override
-    public ProductDto updateProduct(Long id, ProductDto productDto) {
+    public ProductResponseDto updateProduct(Long id, ProductRequestDto requestDto) {
         Product product = productRepository.findById(id)
                 .orElseThrow(NoSuchElementException::new);
+        Category category = categoryRepository.findById(requestDto.getCategoryId())
+                .orElseThrow(NoSuchElementException::new);
 
-        product.setName(productDto.getName());
-        product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
+        product.setName(requestDto.getName());
+        product.setDescription(requestDto.getDescription());
+        product.setPrice(requestDto.getPrice());
+        product.setCategory(category);
+
 
         Product updateProduct = productRepository.save(product);
-        return productConverter.convertToProductDTO(updateProduct);
+        return productToProductResponseDtoConverter.convert(updateProduct);
     }
 
     @Override
     public void deleteProduct(Long id) {
-         productRepository.findById(id)
+        productRepository.findById(id)
                 .orElseThrow(NoSuchElementException::new);
 
         productRepository.deleteById(id);
@@ -53,28 +61,28 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public ProductDto getProductById(Long id) {
+    public ProductResponseDto getProductById(Long id) {
         return productRepository.findById(id)
-                .map(productConverter::convertToProductDTO)
+                .map(productToProductResponseDtoConverter::convert)
                 .orElseThrow(NoSuchElementException::new);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductDto> getAllProducts(Pageable pageable) {
+    public List<ProductResponseDto> getAllProducts(Pageable pageable) {
         return productRepository.findAll()
                 .stream()
-                .map(productConverter::convertToProductDTO)
+                .map(productToProductResponseDtoConverter::convert)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductDto> getProductsByCategory(Long id) {
+    public List<ProductResponseDto> getProductsByCategory(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         return category.getProducts().stream()
-                .map(productConverter::convertToProductDTO)
+                .map(productToProductResponseDtoConverter::convert)
                 .collect(Collectors.toList());
     }
 }

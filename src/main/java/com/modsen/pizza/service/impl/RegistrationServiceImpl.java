@@ -1,11 +1,10 @@
 package com.modsen.pizza.service.impl;
 
-import com.modsen.pizza.enumeration.Role;
 import com.modsen.pizza.entity.User;
+import com.modsen.pizza.enumeration.Role;
 import com.modsen.pizza.repository.UserRepository;
 import com.modsen.pizza.security.JWTResponse;
 import com.modsen.pizza.service.RegistrationService;
-import com.modsen.pizza.service.impl.JWTServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

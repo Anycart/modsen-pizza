@@ -1,23 +1,26 @@
-package com.modsen.pizza.dto;
+package com.modsen.pizza.dto.request;
 
-import com.modsen.pizza.entity.OrderItem;
-import com.modsen.pizza.entity.User;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Past;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class OrderDto {
-    @Min(value = 0)
-    private Long id;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderRequestDto {
     @Min(value = 0)
     private Long userId;
-    @Past
     private LocalDateTime orderDate;
     @Min(value = 0)
     private Double totalAmount;
+    @Valid
+    private List<OrderItemRequestDto> orderItems;
 
 }

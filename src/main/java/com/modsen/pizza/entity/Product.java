@@ -1,15 +1,15 @@
 package com.modsen.pizza.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Table(name = "product")
-@NoArgsConstructor
-@Setter
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "product")
 public class Product {
 
     @Id
@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "category_id")
     private Category category;
 }

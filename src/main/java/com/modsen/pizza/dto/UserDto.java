@@ -3,12 +3,10 @@ package com.modsen.pizza.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
-public class UserDTO {
-
+public class UserDto {
     @NotEmpty
     private String username;
     @NotEmpty
@@ -20,6 +18,5 @@ public class UserDTO {
     private String fullName;
     @NotEmpty
     private String sex;
-    private Date dateOfBirth;
-
+    private LocalDate localDate;
 }
