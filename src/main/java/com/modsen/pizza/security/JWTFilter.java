@@ -1,6 +1,8 @@
 package com.modsen.pizza.security;
 
+import com.modsen.pizza.entity.User;
 import com.modsen.pizza.service.impl.JWTServiceImpl;
+import com.modsen.pizza.service.impl.UserServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,6 +27,7 @@ public class JWTFilter extends GenericFilterBean {
     private static final String AUTHORIZATION = "Authorization";
 
     private final JWTServiceImpl jwtServiceImpl;
+    private final UserServiceImpl userService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc)

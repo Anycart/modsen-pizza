@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/orders")
+@CrossOrigin
 public class OrderController {
 
     private final OrderService orderService;

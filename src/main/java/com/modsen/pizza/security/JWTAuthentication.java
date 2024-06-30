@@ -15,7 +15,7 @@ public class JWTAuthentication implements Authentication {
 
     private boolean authenticated;
     private String username;
-    private String firstName;
+    private String fullName;
     private Set<Role> roles;
 
     @Override
@@ -39,6 +39,6 @@ public class JWTAuthentication implements Authentication {
     }
 
     @Override
-    public String getName() { return firstName; }
+    public String getName() { return fullName; }
 
 }

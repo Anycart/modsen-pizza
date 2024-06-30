@@ -14,5 +14,5 @@ public class ProductRequestDto {
     private Double price;
     @Min(value = 0)
     private Long categoryId;
-
+    private String image;
 }

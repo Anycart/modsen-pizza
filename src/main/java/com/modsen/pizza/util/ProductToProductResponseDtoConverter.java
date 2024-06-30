@@ -28,6 +28,7 @@ public class ProductToProductResponseDtoConverter implements Converter<Product, 
                 .name(source.getName())
                 .description(source.getDescription())
                 .category(categoryResponseDto)
+                .image(source.getImage())
                 .build();
     }
 }

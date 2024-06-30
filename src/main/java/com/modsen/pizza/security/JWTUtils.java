@@ -18,7 +18,7 @@ public final class JWTUtils {
     public static JWTAuthentication generate(Claims claims) {
         final JWTAuthentication jwtInfoToken = new JWTAuthentication();
         jwtInfoToken.setRoles(getRoles(claims));
-        jwtInfoToken.setFirstName(claims.get("firstName", String.class));
+        jwtInfoToken.setFullName(claims.get("fullName", String.class));
         jwtInfoToken.setUsername(claims.getSubject());
         return jwtInfoToken;
     }
