@@ -20,4 +20,5 @@ public class ProductResponseDto {
     private String description;
     private Double price;
     private CategoryResponseDto category;
+    private String image;
 }

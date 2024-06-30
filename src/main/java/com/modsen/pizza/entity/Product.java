@@ -29,4 +29,7 @@ public class Product {
     @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name = "image")
+    private String image;
 }

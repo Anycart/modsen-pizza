@@ -26,6 +26,7 @@ public class ProductRequestDtoToProductConverter implements Converter<ProductReq
                 .name(source.getName())
                 .description(source.getDescription())
                 .category(category)
+                .image(source.getImage())
                 .build();
     }
 }
