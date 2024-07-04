@@ -15,7 +15,7 @@ public class Category {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name")
@@ -29,8 +29,8 @@ public class Category {
 
     @PreRemove
     private void preRemove() {
-        for (Product product : products) {
-            product.setCategory(null);
+        if(products != null) {
+            products.forEach(product -> product.setCategory(null));
         }
     }
 }
